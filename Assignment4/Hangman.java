@@ -2,9 +2,10 @@
  * @author Caymon Sullivan
  * @version 2.0 
  */
-
+/* Java Library Imports */
 import java.io.*;
 
+/* ACM Library Imports */
 import acm.program.*;
 import acm.util.*;
 
@@ -29,7 +30,7 @@ public class Hangman extends ConsoleProgram
     private boolean go = true;    
     
     /** Boolean to determine if the program is running in console mode, or not. Default is true, set false in the canvas class*/
-    private boolean consoleMode = true;
+    private static boolean consoleMode = true;
     
     /** Get a new word from the lexicon. Given to us as a string*/ 
     private String secretWord = "";
@@ -50,7 +51,11 @@ public class Hangman extends ConsoleProgram
      */
 	public void run()
     {
-    	if (consoleMode == true) println("Welcome to Hangman!");
+    	if (consoleMode == true) 
+        {
+            System.out.println("Welcome to Hangman!");
+        }
+
     	genWord();
     	hideWord();
     	play();
@@ -106,10 +111,10 @@ public class Hangman extends ConsoleProgram
     	{
     		if (consoleMode == true) 
     		{
-    			println("Your word is: " + hiddenWord + " (Characters: " + secretWord.length() + ")"); //Display the hiddenWord for the user, and the amount of characters in the string.
-    			println("[DEBUG] (secretWord): " + secretWord);
-    			println("[DEBUG] (hiddenWord): " + hiddenWord);
-    			println("[DEBUG] (secretWord RGEN line number): " + wordLine);
+    			System.out.println("Your word is: " + hiddenWord + " (Characters: " + secretWord.length() + ")"); //Display the hiddenWord for the user, and the amount of characters in the string.
+    			System.out.println("[DEBUG] (secretWord): " + secretWord);
+    			System.out.println("[DEBUG] (hiddenWord): " + hiddenWord);
+    			System.out.println("[DEBUG] (secretWord RGEN line number): " + wordLine);
     			
     			//Ask the user for their guess as to what a character could be.
     			//Get the first character the user inputs. TODO BROKEN: If the user presses enter, or has a space before their character, Java has an error.
@@ -123,15 +128,24 @@ public class Hangman extends ConsoleProgram
     				//Check if the user won!
         			if (hiddenWord.equalsIgnoreCase(secretWord))
         			{
-        				if (consoleMode == true) println("Good job you won!");
-        				setGo(false);
+        				if (consoleMode == true) 
+                        {
+                            System.out.println("Good job you won!");
+        				}
+                        setGo(false);
         				break;
         			}
     				
-        			if (consoleMode == true) println("\n Correct! \n Guess again... \n"); //If the user is correct. Automatically asks for another guess because of the while loop.
-    			} else {
-    				if (consoleMode == true) println("\n Incorrect :( \n Try again.. \n"); //If the user is incorrect. Automatically asks for another guess because of the while loop.
-    			}
+        			if (consoleMode == true) 
+                    {
+                        System.out.println("\n Correct! \n Guess again... \n"); //If the user is correct. Automatically asks for another guess because of the while loop.
+                    }
+                } else {
+    				if (consoleMode == true) 
+                    {
+                        System.out.println("\n Incorrect :( \n Try again.. \n"); //If the user is incorrect. Automatically asks for another guess because of the while loop.
+                    }
+                }
     		}
     	}
     }
@@ -213,11 +227,11 @@ public class Hangman extends ConsoleProgram
      * Getter for the consoleMode boolean 
      * @return True if in console mode, false if not in console mode 
      */
-    public boolean isConsoleMode() {return consoleMode;}
+    public static boolean isConsoleMode(Boolean bool) {if (consoleMode == bool) {return true;} else {return false;}}
     
     /** 
      * Setter for the consoleMode boolean 
      * @param Bool Boolean Bool, Changes if in console mode or not 
      */
-    public void setConsoleMode(Boolean Bool) {consoleMode = Bool;}
+    public static void setConsoleMode(Boolean Bool) {consoleMode = Bool;}
 }
