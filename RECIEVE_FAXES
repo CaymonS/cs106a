@@ -1,0 +1,35 @@
+@echo off 
+set /P input=Would you like to accept incoming faxes? [Y/N]: 
+
+if /i "%input%"=="y" (
+    goto FAXRX
+    echo Done...
+    echo.
+) ELSE (
+    echo.
+    echo ______________________________________
+    echo.
+    echo You chose not to allow incoming faxes!
+    echo ______________________________________
+    goto END
+)
+
+:FAXRX
+    echo.
+    echo _____________
+    echo.
+    echo Running FAXRX
+    echo _____________
+    echo.
+    cd C:\Program Files (x86)\Brother\Brmfl08i
+    call FAXRX.exe
+    echo ...
+    goto END
+    
+:END
+echo.
+echo ________
+echo.
+echo RECIEVE_FAXES Finished
+echo ________
+echo.
