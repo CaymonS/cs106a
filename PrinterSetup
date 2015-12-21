@@ -1,0 +1,48 @@
+@echo off 
+echo.
+echo ____________________________________________________
+echo.
+echo Setting up the properties for the Brother MFC-8480DN
+echo ____________________________________________________
+echo.
+
+:FAXSETUP
+    call RECIEVE_FAXES.bat
+    echo %USERPROFILE%
+    set /p input=Would you like to set up your fax properties? [y/n]
+    if /i "%input%"=="y" (
+        goto FAXPROPS
+    ) ELSE (
+        echo.
+        echo _____________________________________________________
+        echo.
+        echo You chose not to change any of you fax information...
+        echo _____________________________________________________
+        echo.
+        goto end
+    )
+
+:FAXPROPS
+    cd C:\Program Files (x86)\Brother\Brmfl08i
+    call PCfxSet.exe
+    
+:end
+    echo.
+    echo ________________________________ 
+    echo.
+    echo Finished Setting up the printer!
+    echo      We will now restart
+    echo ________________________________
+    echo.
+    
+set loopcount=10
+:loop
+timeout 1 >nul
+    echo Restarting in %loopcount%
+    set /a loopcount=loopcount-1
+    if %loopcount%==0 goto end
+    goto loop
+    
+:end
+    echo Shutting down...
+    shutdown -f -r -a
